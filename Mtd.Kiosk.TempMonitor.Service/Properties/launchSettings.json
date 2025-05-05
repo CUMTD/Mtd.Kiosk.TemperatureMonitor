@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Mtd.Kiosk.TempMonitor": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
