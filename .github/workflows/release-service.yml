@@ -1,0 +1,31 @@
+name: Release Service
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build_and_package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore dependencies
+        run: dotnet restore Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj
+      - name: Build
+        run: dotnet build Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj --configuration Release --no-restore
+      - name: Publish
+        run: dotnet publish Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj --configuration Release --output publish_output
+      - name: Zip publish output
+        uses: actions/upload-artifact@v3
+        with:
+          name: service-release-${{ github.event.release.tag_name }}
+          path: publish_output
+      - name: Create release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          name: service-${{ github.event.release.tag_name }}.zip
+          asset_path: publish_output

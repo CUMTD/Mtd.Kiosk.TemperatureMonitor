@@ -1,0 +1,22 @@
+name: Build Service
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore dependencies
+        run: |
+          dotnet restore Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj
+      - name: Build
+        run: |
+          dotnet build --configuration Debug --no-restore Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj
