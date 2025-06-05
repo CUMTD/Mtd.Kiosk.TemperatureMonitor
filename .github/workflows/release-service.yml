@@ -4,28 +4,37 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: write
+
 jobs:
   build_and_package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-      - name: Restore dependencies
+
+      - name: Restore Dependencies
         run: dotnet restore Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj
+
       - name: Build
         run: dotnet build Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj --configuration Release --no-restore
+
       - name: Publish
         run: dotnet publish Mtd.Kiosk.TempMonitor.Service/Mtd.Kiosk.TempMonitor.Service.csproj --configuration Release --output publish_output
-      - name: Zip publish output
-        uses: actions/upload-artifact@v3
-        with:
-          name: service-release-${{ github.event.release.tag_name }}
-          path: publish_output
-      - name: Create release asset
-        uses: softprops/action-gh-release@v1
+
+      - name: Create .zip of Publish Output
+        run: zip -r service-${{ github.event.release.tag_name }}.zip publish_output
+
+      - name: Create Release Asset
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.release.tag_name }}
           name: service-${{ github.event.release.tag_name }}.zip
-          asset_path: publish_output
+          files: |
+            service-${{ github.event.release.tag_name }}.zip
