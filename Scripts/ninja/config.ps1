@@ -54,7 +54,7 @@ Write-Host "Configuring environment variables..."
 
 # 2a) TemperatureMonitor:KioskId
 if ($env:kioskId) {
-    $key = "$envPrefix`TemperatureMonitor__KioskId"
+    $key = $envPrefix + 'TemperatureMonitor__KioskId'
     $val = $env:kioskId
     Write-Host "  • [$key] = '$val'"
     [Environment]::SetEnvironmentVariable($key, $val, 'Machine')
