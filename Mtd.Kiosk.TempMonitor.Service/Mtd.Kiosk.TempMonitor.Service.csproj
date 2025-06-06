@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>45a2d3a0-a575-47e4-a1b4-86abec5a9c98</UserSecretsId>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +19,5 @@
     <ProjectReference Include="..\Mtd.Kiosk.TempMonitor.Core\Mtd.Kiosk.TempMonitor.Core.csproj" />
     <ProjectReference Include="..\Mtd.Kiosk.TempMonitor.Vertiv\Mtd.Kiosk.TempMonitor.Vertiv.csproj" />
   </ItemGroup>
-
 
 </Project>
