@@ -24,7 +24,7 @@
 $owner = 'CUMTD'
 $repo = 'Mtd.Kiosk.TemperatureMonitor'
 $serviceName = 'MTD Temperature Monitor'
-$serviceExe = 'Mtd.Kiosk.TempMonitor.Service'
+$serviceExe = 'Mtd.Kiosk.TempMonitor.Service.exe'
 $installRoot = "$env:SystemDrive\Services"
 $envPrefix = 'Kiosk_Temp_Sensor__'
 

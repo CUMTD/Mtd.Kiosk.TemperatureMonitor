@@ -40,7 +40,7 @@ Write-Host "Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 $owner = 'CUMTD'
 $repo = 'Mtd.Kiosk.TemperatureMonitor'
 $serviceName = 'MTD Temperature Monitor'
-$serviceExe = 'Mtd.Kiosk.TempMonitor.Service'
+$serviceExe = 'Mtd.Kiosk.TempMonitor.Service.exe'
 $installRoot = "$env:SystemDrive\Services"
 #endregion
 
@@ -101,7 +101,7 @@ Expand-Archive -LiteralPath $tempZip -DestinationPath $extractDir -Force -ErrorA
 
 #region Install Files
 $publishFolder = Get-ChildItem -Path $extractDir -Recurse -Directory |
-    Where-Object { $_.Name -eq 'publish_output' } | Select-Object -First 1
+Where-Object { $_.Name -eq 'publish_output' } | Select-Object -First 1
 
 if (-not $publishFolder) { Throw-Terminate "publish_output not found in ZIP" }
 
