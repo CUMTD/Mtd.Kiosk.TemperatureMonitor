@@ -152,7 +152,7 @@ if (-not (Test-Path $exePath)) {
 Write-Host "Registering service '$serviceName' (StartupType = Automatic) → $exePath"
 New-Service `
     -Name           $serviceName `
-    -BinaryPathName $exePath `
+    -BinaryPathName "`"$exePath`"`" `
     -DisplayName    $serviceName `
     -StartupType    Automatic
 
