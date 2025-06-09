@@ -1,4 +1,4 @@
-<# 
+<#
 .SYNOPSIS
     Configures and starts the Temperature Monitor Service using Ninja RMM variables.
 
@@ -17,6 +17,7 @@
       - $env:kioskId
       - $env:vertivIp   (optional)
       - $env:adafruitEnabled
+      - $env:apiKey
     Run as Administrator.
 #>
 
@@ -63,7 +64,18 @@ else {
     Throw-Terminate "Missing required Ninja variable: `\$env:kioskId."
 }
 
-# 2b) VertivSensorWorker
+# 2b) TemperatureMonitor:apiKey
+if ($env:kioskId) {
+    $key = $envPrefix + 'TemperatureMonitor__ApiKey'
+    $val = $env:apiKey
+    Write-Host "  • [$key] = '$val'"
+    [Environment]::SetEnvironmentVariable($key, $val, 'Machine')
+}
+else {
+    Throw-Terminate "Missing required Ninja variable: `\$env:kioskId."
+}
+
+# 2c) VertivSensorWorker
 if ($env:vertivIp) {
     $keyIp = "$envPrefix`VertivSensorWorker__SensorIp"
     $keyEnabled = "$envPrefix`VertivSensorWorker__Enabled"
@@ -78,7 +90,7 @@ else {
     [Environment]::SetEnvironmentVariable($keyEnabled, 'false', 'Machine')
 }
 
-# 2c) AdafruitSensorWorker:Enabled (required)
+# 2d) AdafruitSensorWorker:Enabled (required)
 if ($env:adafruitEnabled) {
     $keyAdafruit = "$envPrefix`AdafruitSensorWorker__Enabled"
     Write-Host "  • Setting [$keyAdafruit] = '$env:adafruitEnabled'"
@@ -102,3 +114,8 @@ if ($svc) {
 else {
     Throw-Terminate "Service '$serviceName' not found. Cannot set StartupType or start."
 }
+
+
+# ─────── [ 4. REBOOT ] ───────
+
+Restart-Computer -Force -ErrorAction SilentlyContinue

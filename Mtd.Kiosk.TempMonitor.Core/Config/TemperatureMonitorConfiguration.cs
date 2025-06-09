@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mtd.Kiosk.TempMonitor.Config;
+namespace Mtd.Kiosk.TempMonitor.Core.Config;
 
 
 public class TemperatureMonitorConfiguration
@@ -10,7 +10,8 @@ public class TemperatureMonitorConfiguration
     public int ReportingIntervalSeconds { get; set; }
 
     [Required]
-    public string KioskId { get; set; } = "";
+    public required string KioskId { get; set; }
+    [Required]
     public string? ApiKey { get; set; }
 
 }

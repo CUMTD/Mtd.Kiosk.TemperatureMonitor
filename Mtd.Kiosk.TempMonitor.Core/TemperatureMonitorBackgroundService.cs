@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Mtd.Kiosk.TempMonitor.Config;
+using Mtd.Kiosk.TempMonitor.Core.Config;
 
 namespace Mtd.Kiosk.TempMonitor.Core
 {

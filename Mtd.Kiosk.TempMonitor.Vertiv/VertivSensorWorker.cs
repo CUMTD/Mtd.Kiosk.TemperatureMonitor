@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Mtd.Kiosk.TempMonitor.Config;
 using Mtd.Kiosk.TempMonitor.Core;
+using Mtd.Kiosk.TempMonitor.Core.Config;
 using Mtd.Kiosk.TempMonitor.Vertiv.Config;
 using System.Text.Json;
 

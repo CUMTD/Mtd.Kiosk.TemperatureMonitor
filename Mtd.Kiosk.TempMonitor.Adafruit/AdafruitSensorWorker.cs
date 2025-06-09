@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Mtd.Kiosk.TempMonitor.Config;
 using Mtd.Kiosk.TempMonitor.Core;
+using Mtd.Kiosk.TempMonitor.Core.Config;
 using System.IO.Ports;
 using System.Management;
 using System.Runtime.Versioning;
