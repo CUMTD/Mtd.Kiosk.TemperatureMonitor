@@ -6,6 +6,7 @@
     1. Stops "MTD Temperature Monitor" if running.
     2. Sets environment variables (Machine scope) for:
        - TemperatureMonitor:KioskId
+       - TemperatureMonitor:ApiKey
        - VertivSensorWorker:SensorIp  (only if provided)
        - VertivSensorWorker:Enabled
        - AdafruitSensorWorker:Enabled
