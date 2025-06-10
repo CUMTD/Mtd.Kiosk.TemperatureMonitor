@@ -65,14 +65,14 @@ else {
 }
 
 # 2b) TemperatureMonitor:apiKey
-if ($env:kioskId) {
+if ($env:apiKey) {
     $key = $envPrefix + 'TemperatureMonitor__ApiKey'
     $val = $env:apiKey
     Write-Host "  • [$key] = '$val'"
     [Environment]::SetEnvironmentVariable($key, $val, 'Machine')
 }
 else {
-    Throw-Terminate "Missing required Ninja variable: `\$env:kioskId."
+    Throw-Terminate "Missing required Ninja variable: `\$env:apiKey."
 }
 
 # 2c) VertivSensorWorker
